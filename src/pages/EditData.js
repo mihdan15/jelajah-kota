@@ -10,14 +10,10 @@ import {
   DialogHeader,
   DialogBody,
   DialogFooter,
+  Alert,
 } from "@material-tailwind/react";
 import { gql, useMutation, useQuery } from "@apollo/client";
-import {
-  BellIcon,
-  ArrowLongLeftIcon,
-  ArrowRightIcon,
-  ArrowLeftIcon,
-} from "@heroicons/react/24/solid";
+import { BellIcon, ArrowLongLeftIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
 import Pagination from "../components/Pagination";
 
@@ -78,6 +74,9 @@ const DeleteDialog = ({ handleDelete, closeModal }) => {
 };
 
 const EditData = () => {
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertColor, setAlertColor] = useState("");
   //Query Get Data
   const GET_DATA = gql`
     query GetData {
@@ -159,6 +158,21 @@ const EditData = () => {
     }));
   };
   const handleEditConfirmation = async () => {
+    if (
+      editData.nama_dest === "" ||
+      editData.lokasi_dest === "" ||
+      editData.deskripsi_dest === "" ||
+      editData.rating_dest === "" ||
+      editData.img_dest === ""
+    ) {
+      setAlertMessage("Inputan tidak boleh ada yang kosong!");
+      setAlertColor("red");
+      setShowAlert(true);
+      setTimeout(() => {
+        setShowAlert(false);
+      }, 1000);
+      return;
+    }
     try {
       await updateData({
         variables: {
@@ -170,6 +184,12 @@ const EditData = () => {
           img_dest: editData.img_dest,
         },
       });
+      setAlertMessage("Berhasil tambah destinasi");
+      setAlertColor("green");
+      setShowAlert(true);
+      setTimeout(() => {
+        setShowAlert(false);
+      }, 3000);
       setIsEditMode(false);
       setEditData({
         id: null,
@@ -250,6 +270,11 @@ const EditData = () => {
               <Typography color="gray" className="mt-1 font-normal">
                 Edit destinasi yang ada
               </Typography>
+              {showAlert && (
+                <Alert color={alertColor} variant="gradient">
+                  <span>{alertMessage}</span>
+                </Alert>
+              )}
               <form className="mt-8 mb-2 max-w-screen-lg sm:w-96">
                 <div className="mb-4 flex flex-col gap-6 w-[40rem]">
                   <Input

@@ -100,7 +100,13 @@ const AddData = () => {
   });
 
   const handleTambah = async () => {
-    if (namaDest === "" || lokasiDest === "" || deskripsiDest === "") {
+    if (
+      namaDest === "" ||
+      lokasiDest === "" ||
+      deskripsiDest === "" ||
+      ratingDest === "" ||
+      imgDest === ""
+    ) {
       setAlertMessage("Inputan tidak boleh ada yang kosong!");
       setAlertColor("red");
       setShowAlert(true);

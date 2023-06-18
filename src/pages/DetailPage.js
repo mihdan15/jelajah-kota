@@ -1,7 +1,13 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { gql, useQuery } from "@apollo/client";
-import { Typography, Button } from "@material-tailwind/react";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  Typography,
+  Button,
+} from "@material-tailwind/react";
 
 export default function DetailPage() {
   const { id } = useParams();
@@ -47,17 +53,49 @@ export default function DetailPage() {
           </figcaption>
         </figure>
       </div>
-      <div>
-        <h1>{destinasi.nama_dest}</h1>
-        <p>{destinasi.deskripsi_dest}</p>
-        <p>{destinasi.lokasi_dest}</p>
-        <p>{destinasi.rating_dest}</p>
-        <img src={destinasi.img_dest} alt={destinasi.nama_dest} />
+      <div className="container mx-auto p-32">
+        <Typography variant="h1" className="text-center">
+          Detail {destinasi.nama_dest}
+        </Typography>
+        <Card key={destinasi.id} className="w-full shadow-lg mt-11">
+          <CardHeader floated={false} color="blue-gray">
+            <img
+              className="h-full w-full object-cover"
+              src={destinasi.img_dest}
+              alt={destinasi.nama_dest}
+            />
+            <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60 " />
+          </CardHeader>
+          <CardBody>
+            <div className="flex items-center justify-between">
+              <Typography variant="h5" color="blue-gray" className="font-bold">
+                {destinasi.nama_dest}
+              </Typography>
+              <div className="mb-3 flex items-center justify-between">
+                <Typography
+                  color="blue-gray"
+                  className="flex items-center gap-1.5 font-normal"
+                >
+                  Rating : {destinasi.rating_dest}
+                </Typography>
+              </div>
+            </div>
+            <Typography
+              color="blue-gray"
+              className=" mb-3 flex items-center gap-1.5 font-normal"
+            ></Typography>
+            <Typography color="gray">{destinasi.deskripsi_dest}</Typography>
+          </CardBody>
+        </Card>
+        <div className="flex justify-center">
+          <Button
+            onClick={() => navigate(-1)}
+            className="back-btn items-center mx-auto mt-11"
+          >
+            Kembali
+          </Button>
+        </div>
       </div>
-      <Button onClick={() => navigate(-1)} className="back-btn">
-        Kembali
-      </Button>
-      {/* Tampilkan informasi detail destinasi di sini */}
     </div>
   );
 }

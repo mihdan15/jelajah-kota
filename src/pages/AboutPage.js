@@ -1,4 +1,4 @@
-import { Typography } from "@material-tailwind/react";
+import { Typography, Link } from "@material-tailwind/react";
 
 const AboutPage = () => {
   return (

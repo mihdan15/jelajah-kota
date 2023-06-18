@@ -205,7 +205,7 @@ export default function Header() {
                 </Button>
                 <Button
                   variant="gradient"
-                  color="green"
+                  color="blue"
                   onClick={handleConfirmAdmin}
                 >
                   <span>Confirm</span>

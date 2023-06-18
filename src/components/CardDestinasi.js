@@ -30,17 +30,6 @@ export default function CardDestinasi({ limit, enableSearch, searchTerm }) {
   if (loading) return <p>Memuat Data...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
-  // Filter data berdasarkan searchTerm
-  // const filteredData = data.tb_destinasi.filter(
-  //   (dest) =>
-  //     (dest &&
-  //       dest.nama_dest &&
-  //       dest.nama_dest.toLowerCase().includes(searchTerm.toLowerCase())) ||
-  //     (dest &&
-  //       dest.lokasi_dest &&
-  //       dest.lokasi_dest.toLowerCase().includes(searchTerm.toLowerCase()))
-  // );
-
   let filteredData = data.tb_destinasi;
 
   if (enableSearch && searchTerm) {
@@ -50,10 +39,6 @@ export default function CardDestinasi({ limit, enableSearch, searchTerm }) {
         dest.lokasi_dest.toLowerCase().includes(searchTerm.toLowerCase())
     );
   }
-
-  // const filteredData = data.tb_destinasi.filter((dest) =>
-  //   dest.nama_dest.includes(searchTerm)
-  // );
 
   return (
     <div class="container mx-auto p-2">
