@@ -1,5 +1,6 @@
 # Login Admin = 123456
 ## Link web https://jelajah-kota.mihdanadvani.my.id/
+## Link Manual Book https://s.id/manualbook-jk
 
 # Getting Started with Create React App
 
